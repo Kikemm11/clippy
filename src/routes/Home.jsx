@@ -5,6 +5,7 @@ import clippyBanner from '../assets/clippy_banner.jpeg';
 import clippyPhone from '../assets/clippy_phone.png';
 import logicatLogo from '../assets/logicatstudio_logo.png';
 import kikemm11 from '../assets/me.jpg';
+import logicat from '../assets/logicat.png';
 
 export default function App() {
   const scrollToSection = (id) => (e) => {
@@ -244,7 +245,7 @@ export default function App() {
             
             {/* Windows Download Card */}
             <a 
-              href="https://github.com/logicatstudio/clippy/releases/latest" 
+              href="https://github.com/Kikemm11/clippy/releases/download/1.0.0/Clippy_Setup_1.0.0_x64.exe" 
               target="_blank" 
               rel="noopener noreferrer"
               className="w-full sm:w-1/2 bg-[#faf8f5] hover:bg-[#1d1c15] text-[#1d1c15] hover:text-white p-8 rounded-3xl border border-[#1d1c15]/10 hover:border-black shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group flex flex-col items-center text-center cursor-pointer"
@@ -270,7 +271,7 @@ export default function App() {
 
             {/* Linux Download Card */}
             <a 
-              href="https://github.com/logicatstudio/clippy/releases/latest" 
+              href="https://github.com/Kikemm11/clippy/releases/download/1.0.0/clippy_1.0.0_amd64.deb" 
               target="_blank" 
               rel="noopener noreferrer"
               className="w-full sm:w-1/2 bg-[#faf8f5] hover:bg-[#1d1c15] text-[#1d1c15] hover:text-white p-8 rounded-3xl border border-[#1d1c15]/10 hover:border-black shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group flex flex-col items-center text-center cursor-pointer"
@@ -360,9 +361,9 @@ export default function App() {
             
             {/* Studio Contact Card */}
             <div className="bg-[#faf8f5] p-8 rounded-3xl border border-[#1d1c15]/10 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center group hover:-translate-y-1">
-              <div className="w-28 h-28 rounded-2xl bg-white p-3 mb-6 border-2 border-[#1d1c15]/5 shadow-md flex items-center justify-center group-hover:border-[#D95C1E] transition-colors">
+              <div className="w-28 h-28 rounded-full bg-white p-3 mb-6 border-2 border-[#1d1c15]/5 shadow-md flex items-center justify-center group-hover:border-[#D95C1E] transition-colors">
                 <img 
-                  src={logicatLogo} 
+                  src={logicat} 
                   alt="LogiCat Studio" 
                   className="w-full h-full object-contain"
                   onError={(e) => {
@@ -372,7 +373,7 @@ export default function App() {
                 />
               </div>
 
-              <h3 className="text-xl font-bold text-[#1d1c15]">LogiCat Studio</h3>
+              <h3 className="text-xl font-bold text-[#1d1c15]">Logicat</h3>
               <p className="text-xs uppercase tracking-wider font-semibold text-[#D95C1E] mt-1 mb-4">
                 Estudio de Desarrollo
               </p>
