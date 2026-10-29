@@ -7,12 +7,22 @@ import logicatLogo from '../assets/logicatstudio_logo.png';
 import kikemm11 from '../assets/me.jpg';
 import logicat from '../assets/logicat.png';
 
-export default function App() {
+export default function Home() {
   const scrollToSection = (id) => (e) => {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Analytics event tracking helper
+  const trackEvent = (action, category, label) => {
+    if (window.gtag) {
+      window.gtag('event', action, {
+        event_category: category,
+        event_label: label,
+      });
     }
   };
 
@@ -43,7 +53,10 @@ export default function App() {
           <nav className="flex items-center gap-8 text-base font-medium text-white/90">
             <a 
               href="#descarga" 
-              onClick={scrollToSection('descarga')}
+              onClick={(e) => {
+                scrollToSection('descarga')(e);
+                trackEvent('click_nav', 'Navigation', 'Descarga Section');
+              }}
               className="relative py-1 group cursor-pointer hover:text-white transition-colors drop-shadow-sm"
             >
               Descargar
@@ -52,7 +65,10 @@ export default function App() {
 
             <a 
               href="#nosotros" 
-              onClick={scrollToSection('nosotros')}
+              onClick={(e) => {
+                scrollToSection('nosotros')(e);
+                trackEvent('click_nav', 'Navigation', 'Nosotros Section');
+              }}
               className="relative py-1 group cursor-pointer hover:text-white transition-colors drop-shadow-sm"
             >
               Nosotros
@@ -61,7 +77,10 @@ export default function App() {
 
             <a 
               href="#contacto" 
-              onClick={scrollToSection('contacto')}
+              onClick={(e) => {
+                scrollToSection('contacto')(e);
+                trackEvent('click_nav', 'Navigation', 'Contacto Section');
+              }}
               className="relative py-1 group cursor-pointer hover:text-white transition-colors drop-shadow-sm"
             >
               Contacto
@@ -248,6 +267,7 @@ export default function App() {
               href="https://github.com/Kikemm11/clippy/releases/download/1.0.0/Clippy_Setup_1.0.0_x64.exe" 
               target="_blank" 
               rel="noopener noreferrer"
+              onClick={() => trackEvent('download_file', 'Downloads', 'Windows Setup Exe')}
               className="w-full sm:w-1/2 bg-[#faf8f5] hover:bg-[#1d1c15] text-[#1d1c15] hover:text-white p-8 rounded-3xl border border-[#1d1c15]/10 hover:border-black shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group flex flex-col items-center text-center cursor-pointer"
             >
               <div className="w-16 h-16 rounded-2xl bg-[#D95C1E]/10 group-hover:bg-[#D95C1E] flex items-center justify-center mb-5 transition-colors duration-300">
@@ -274,6 +294,7 @@ export default function App() {
               href="https://github.com/Kikemm11/clippy/releases/download/1.0.0/clippy_1.0.0_amd64.deb" 
               target="_blank" 
               rel="noopener noreferrer"
+              onClick={() => trackEvent('download_file', 'Downloads', 'Linux Deb Package')}
               className="w-full sm:w-1/2 bg-[#faf8f5] hover:bg-[#1d1c15] text-[#1d1c15] hover:text-white p-8 rounded-3xl border border-[#1d1c15]/10 hover:border-black shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group flex flex-col items-center text-center cursor-pointer"
             >
               <div className="w-16 h-16 rounded-2xl bg-[#D95C1E]/10 group-hover:bg-[#D95C1E] flex items-center justify-center mb-5 transition-colors duration-300">
