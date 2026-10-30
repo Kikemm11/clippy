@@ -277,8 +277,11 @@ export default function Home() {
               </div>
 
               <h3 className="font-bold text-xl mb-1">Windows</h3>
+              <p className="text-xs text-[#594138] group-hover:text-gray-300">
+                Compatible con Windows 10 / 11 (64-bit) 
+              </p>
               <p className="text-xs text-[#594138] group-hover:text-gray-300 mb-6">
-                Compatible con Windows 10 / 11 (64-bit)
+                Versión 1.0.1 
               </p>
 
               <div className="w-full py-3 px-4 bg-[#D95C1E] text-white rounded-xl font-semibold text-sm shadow-md group-hover:bg-[#c24f17] transition-colors flex items-center justify-center gap-2">
@@ -304,8 +307,11 @@ export default function Home() {
               </div>
 
               <h3 className="font-bold text-xl mb-1">Linux</h3>
-              <p className="text-xs text-[#594138] group-hover:text-gray-300 mb-6">
+              <p className="text-xs text-[#594138] group-hover:text-gray-300">
                 Paquete .deb para Ubuntu, Debian y derivados
+              </p>
+              <p className="text-xs text-[#594138] group-hover:text-gray-300 mb-6">
+                Versión 1.0.1 
               </p>
 
               <div className="w-full py-3 px-4 bg-[#D95C1E] text-white rounded-xl font-semibold text-sm shadow-md group-hover:bg-[#c24f17] transition-colors flex items-center justify-center gap-2">
