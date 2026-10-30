@@ -264,7 +264,7 @@ export default function Home() {
             
             {/* Windows Download Card */}
             <a 
-              href="https://github.com/Kikemm11/clippy/releases/download/1.0.0/Clippy_Setup_1.0.0_x64.exe" 
+              href="https://github.com/Kikemm11/clippy/releases/download/1.0.1/Clippy_Setup_1.0.1_x64.exe" 
               target="_blank" 
               rel="noopener noreferrer"
               onClick={() => trackEvent('download_file', 'Downloads', 'Windows Setup Exe')}
@@ -291,7 +291,7 @@ export default function Home() {
 
             {/* Linux Download Card */}
             <a 
-              href="https://github.com/Kikemm11/clippy/releases/download/1.0.0/clippy_1.0.0_amd64.deb" 
+              href="https://github.com/Kikemm11/clippy/releases/download/1.0.1/clippy_1.0.1_amd64.deb" 
               target="_blank" 
               rel="noopener noreferrer"
               onClick={() => trackEvent('download_file', 'Downloads', 'Linux Deb Package')}
