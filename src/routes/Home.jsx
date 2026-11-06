@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Menu, X } from 'lucide-react';
 
 import clippyLogo from '../assets/icon.svg';
 import clippyBanner from '../assets/clippy_banner.jpeg';
@@ -8,12 +9,15 @@ import kikemm11 from '../assets/me.jpg';
 import logicat from '../assets/logicat.png';
 
 export default function Home() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const scrollToSection = (id) => (e) => {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+    setIsMobileMenuOpen(false); 
   };
 
   // Analytics event tracking helper
@@ -30,7 +34,7 @@ export default function Home() {
     <div className="min-h-screen text-[#1d1c15] font-sans antialiased flex flex-col relative bg-white">
       
       {/* Fixed Overlay Header Navigation */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/60 via-black/30 to-transparent px-6 py-5 transition-all">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/80 via-black/50 to-transparent backdrop-blur-md px-6 py-5 transition-all">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           
           {/* Left Side: Brand Logo */}
@@ -49,8 +53,8 @@ export default function Home() {
             </span>
           </div>
 
-          {/* Right Side: Nav Links */}
-          <nav className="flex items-center gap-8 text-base font-medium text-white/90">
+          {/* Right Side: Desktop Nav Links (Hidden on small screens) */}
+          <nav className="hidden md:flex items-center gap-8 text-base font-medium text-white/90">
             <a 
               href="#descarga" 
               onClick={(e) => {
@@ -87,19 +91,65 @@ export default function Home() {
               <span className="absolute bottom-0 left-0 w-full h-[2.5px] bg-[#D95C1E] rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left" />
             </a>
           </nav>
+
+          {/* Mobile Hamburger Button */}
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden text-white p-2 focus:outline-none"
+            aria-label="Toggle Menu"
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+
+        {/* Mobile Dropdown Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 right-0 bg-zinc-900/95 backdrop-blur-xl border-b border-white/10 px-6 py-6 shadow-2xl flex flex-col gap-5 text-lg font-medium text-white transition-all">
+            <a 
+              href="#descarga" 
+              onClick={(e) => {
+                scrollToSection('descarga')(e);
+                trackEvent('click_nav', 'Navigation', 'Descarga Section');
+              }}
+              className="hover:text-[#D95C1E] transition-colors py-2 border-b border-white/5"
+            >
+              Descargar
+            </a>
+            <a 
+              href="#nosotros" 
+              onClick={(e) => {
+                scrollToSection('nosotros')(e);
+                trackEvent('click_nav', 'Navigation', 'Nosotros Section');
+              }}
+              className="hover:text-[#D95C1E] transition-colors py-2 border-b border-white/5"
+            >
+              Nosotros
+            </a>
+            <a 
+              href="#contacto" 
+              onClick={(e) => {
+                scrollToSection('contacto')(e);
+                trackEvent('click_nav', 'Navigation', 'Contacto Section');
+              }}
+              className="hover:text-[#D95C1E] transition-colors py-2"
+            >
+              Contacto
+            </a>
+          </div>
+        )}
       </header>
 
       {/* Main Content Area */}
       <main className="flex-grow w-full">
         
         {/* Full Viewport Width Banner Section */}
-        <section className="w-full relative">
+        <section className="w-full relative pb-12 md:pb-0">
+          {/* Banner Container */}
           <div className="w-full h-[50vh] md:h-[65vh] lg:h-[80vh] overflow-hidden bg-[#1d1c15] relative">
             <img 
               src={clippyBanner}
               alt="Clippy Banner" 
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-fit object-center opacity-90"
               onError={(e) => {
                 e.target.style.display = 'none';
                 e.target.parentElement.classList.add('flex', 'items-center', 'justify-center', 'p-12', 'text-center', 'text-white');
@@ -107,12 +157,12 @@ export default function Home() {
               }}
             />
 
-            {/* Google Play Store Badge */}
+            {/* Google Play Store Badge - Reposicionado para no colisionar en móviles */}
             <div 
               onClick={() => {}} 
-              className="absolute bottom-8 left-6 md:bottom-20 md:left-12 z-20 bg-black/90 hover:bg-black text-white px-5 py-3 rounded-2xl border border-white/10 shadow-xl flex items-center gap-3 cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95 group"
+              className="absolute bottom-16 left-4 md:bottom-20 md:left-12 z-20 bg-black/90 hover:bg-black text-white px-4 py-2.5 md:px-5 md:py-3 rounded-2xl border border-white/10 shadow-xl flex items-center gap-3 cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95 group"
             >
-              <svg className="w-6 h-6 md:w-7 md:h-7 flex-shrink-0 transition-transform group-hover:rotate-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className="w-5 h-5 md:w-7 md:h-7 flex-shrink-0 transition-transform group-hover:rotate-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3.609 1.814L13.792 12 3.61 22.186A2.37 2.37 0 0 1 3 20.57V3.43c0-.623.228-1.206.609-1.616z" fill="#00D2FF"/>
                 <path d="M17.256 8.536l-3.464 3.464 3.464 3.464 3.903-2.23c.896-.512.896-1.832 0-2.344l-3.903-2.354z" fill="#FFD200"/>
                 <path d="M3.609 1.814L13.792 12 17.256 8.536 6.85.59C5.772-.026 4.385.394 3.609 1.814z" fill="#00F076"/>
@@ -120,10 +170,10 @@ export default function Home() {
               </svg>
               
               <div className="flex flex-col text-left">
-                <span className="text-[10px] md:text-xs uppercase tracking-wider text-gray-400 font-semibold leading-tight">
+                <span className="text-[9px] md:text-xs uppercase tracking-wider text-gray-400 font-semibold leading-tight">
                   Google Play
                 </span>
-                <span className="text-xs md:text-sm font-medium text-white leading-tight">
+                <span className="text-[11px] md:text-sm font-medium text-white leading-tight">
                   Disponible próximamente
                 </span>
               </div>
@@ -131,8 +181,8 @@ export default function Home() {
           </div>
 
           {/* Bottom-Center Overlapping Orange Container */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 bottom-0 translate-y-1/2 z-30 w-[90%] max-w-2xl bg-[#D95C1E] text-white px-6 py-4 md:py-5 rounded-2xl shadow-lg border border-white/20 text-center">
-            <p className="text-sm md:text-base lg:text-lg font-semibold tracking-wide">
+          <div className="relative md:absolute w-[90%] max-w-2xl mx-auto left-0 right-0 md:left-1/2 md:right-auto md:transform md:-translate-x-1/2 -mt-6 md:-mt-0 md:bottom-0 md:translate-y-1/2 z-30 bg-[#D95C1E] text-white px-6 py-4 md:py-5 rounded-2xl shadow-lg border border-white/20 text-center">
+            <p className="text-xs md:text-base lg:text-lg font-semibold tracking-wide">
               Comparte texto, imágenes y documentos entre dispositivos
             </p>
           </div>
@@ -448,35 +498,35 @@ export default function Home() {
       </main>
 
       {/* Black Footer Section */}
-      <footer className="w-full bg-[#1d1c15] text-white py-6 px-6 border-t border-white/10">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          
-          {/* Very Left Part: Icon & Brand Title */}
-          <div 
-            className="flex items-center gap-3 cursor-pointer group" 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          >
-            <img 
-              src={clippyLogo}
-              alt="Clippy Logo" 
-              className="w-8 h-8 object-contain group-hover:scale-105 transition-transform" 
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23D95C1E"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5 0 1.49-.93 2.77-2.25 3.28V15h-2.5v-2.22c-1.32-.51-2.25-1.79-2.25-3.28C8.5 7.57 10.07 6 12 6z"/></svg>';
-              }}
-            />
-            <span className="font-bold text-lg tracking-tight text-white">
-              Clippy
-            </span>
-          </div>
+      <footer className="w-full bg-[#1d1c15] text-white py-8 px-6 border-t border-white/10">
+  <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+    
+    {/* Left Part: Icon & Brand Title */}
+    <div 
+      className="flex items-center gap-3 cursor-pointer group" 
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+    >
+      <img 
+        src={clippyLogo}
+        alt="Clippy Logo" 
+        className="w-8 h-8 object-contain group-hover:scale-105 transition-transform" 
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23D95C1E"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5 0 1.49-.93 2.77-2.25 3.28V15h-2.5v-2.22c-1.32-.51-2.25-1.79-2.25-3.28C8.5 7.57 10.07 6 12 6z"/></svg>';
+        }}
+      />
+      <span className="font-bold text-lg tracking-tight text-white">
+        Clippy
+      </span>
+    </div>
 
-          {/* Right Side: Copyright */}
-          <div className="text-xs text-gray-400">
-            © {new Date().getFullYear()} Logicat Studio. Todos los derechos reservados.
-          </div>
+    {/* Right Side: Copyright */}
+    <div className="text-xs text-gray-400">
+      © {new Date().getFullYear()} Logicat Studio. Todos los derechos reservados.
+    </div>
 
-        </div>
-      </footer>
+  </div>
+</footer>
 
     </div>
   );
