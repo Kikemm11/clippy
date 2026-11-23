@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 import clippyLogo from '../assets/icon.svg';
@@ -10,6 +11,17 @@ import logicat from '../assets/logicat.png';
 
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  // Allows other routes (e.g. /privacy-policy) to link back to a specific section
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.slice(1));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
 
   const scrollToSection = (id) => (e) => {
     e.preventDefault();
@@ -499,11 +511,11 @@ export default function Home() {
 
       {/* Black Footer Section */}
       <footer className="w-full bg-[#1d1c15] text-white py-8 px-6 border-t border-white/10">
-  <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+  <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
     
     {/* Left Part: Icon & Brand Title */}
     <div 
-      className="flex items-center gap-3 cursor-pointer group" 
+      className="flex items-center gap-3 cursor-pointer group sm:flex-1" 
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
     >
       <img 
@@ -520,8 +532,15 @@ export default function Home() {
       </span>
     </div>
 
+    <Link 
+      to="/privacy-policy" 
+      className="text-xs text-gray-400 hover:text-[#D95C1E] transition-colors underline decoration-[#D95C1E]/40 underline-offset-4"
+    >
+      Política de Privacidad
+    </Link>
+
     {/* Right Side: Copyright */}
-    <div className="text-xs text-gray-400">
+    <div className="text-xs text-gray-400 sm:flex-1 sm:text-right">
       © {new Date().getFullYear()} Logicat Studio. Todos los derechos reservados.
     </div>
 
