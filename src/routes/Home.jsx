@@ -115,7 +115,7 @@ export default function Home() {
           </div>
 
           {/* Right Side: Desktop Nav Links (Hidden on small screens) */}
-          <nav className="hidden md:flex items-center gap-8 text-base font-medium text-white/90">
+          <nav className="hidden md:flex items-center gap-5 lg:gap-8 text-base font-medium text-white/90">
             <a 
               href="#descarga" 
               onClick={(e) => {
@@ -163,6 +163,15 @@ export default function Home() {
               Contacto
               <span className="absolute bottom-0 left-0 w-full h-[2.5px] bg-[#D95C1E] rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left" />
             </a>
+
+            <Link 
+              to="/faqs" 
+              onClick={() => trackEvent('click_nav', 'Navigation', 'FAQs')}
+              className="relative py-1 group cursor-pointer hover:text-white transition-colors drop-shadow-sm"
+            >
+              FAQs
+              <span className="absolute bottom-0 left-0 w-full h-[2.5px] bg-[#D95C1E] rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left" />
+            </Link>
           </nav>
 
           {/* Mobile Hamburger Button */}
@@ -214,10 +223,20 @@ export default function Home() {
                 scrollToSection('contacto')(e);
                 trackEvent('click_nav', 'Navigation', 'Contacto Section');
               }}
-              className="hover:text-[#D95C1E] transition-colors py-2"
+              className="hover:text-[#D95C1E] transition-colors py-2 border-b border-white/5"
             >
               Contacto
             </a>
+            <Link 
+              to="/faqs" 
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                trackEvent('click_nav', 'Navigation', 'FAQs');
+              }}
+              className="hover:text-[#D95C1E] transition-colors py-2"
+            >
+              FAQs
+            </Link>
           </div>
         )}
       </header>
@@ -414,7 +433,7 @@ export default function Home() {
                 Compatible con Windows 10 / 11 (64-bit) 
               </p>
               <p className="text-xs text-[#594138] group-hover:text-gray-300 mb-6">
-                Versión 1.0.1 
+                Versión 2.0.0 
               </p>
 
               <div className="w-full py-3 px-4 bg-[#D95C1E] text-white rounded-xl font-semibold text-sm shadow-md group-hover:bg-[#c24f17] transition-colors flex items-center justify-center gap-2">
@@ -444,7 +463,7 @@ export default function Home() {
                 Paquete .deb para Ubuntu, Debian y derivados
               </p>
               <p className="text-xs text-[#594138] group-hover:text-gray-300 mb-6">
-                Versión 1.0.1 
+                Versión 2.0.0 
               </p>
 
               <div className="w-full py-3 px-4 bg-[#D95C1E] text-white rounded-xl font-semibold text-sm shadow-md group-hover:bg-[#c24f17] transition-colors flex items-center justify-center gap-2">

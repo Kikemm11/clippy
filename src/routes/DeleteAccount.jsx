@@ -12,6 +12,7 @@ export default function DeleteAccount() {
     { label: 'Suscripciones', to: '/#subscripciones' },
     { label: 'Nosotros', to: '/#nosotros' },
     { label: 'Contacto', to: '/#contacto' },
+    { label: 'FAQs', to: '/faqs' },
   ];
 
   return (
@@ -42,7 +43,7 @@ export default function DeleteAccount() {
           </Link>
 
           {/* Right Side: Desktop Nav Links (Hidden on small screens) */}
-          <nav className="hidden md:flex items-center gap-8 text-base font-medium text-white/90">
+          <nav className="hidden md:flex items-center gap-5 lg:gap-8 text-base font-medium text-white/90">
             {navLinks.map((link) => (
               <Link 
                 key={link.label}
