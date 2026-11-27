@@ -9,6 +9,7 @@ export default function PrivacyPolicy() {
 
   const navLinks = [
     { label: 'Descargar', to: '/#descarga' },
+    { label: 'Suscripciones', to: '/#subscripciones' },
     { label: 'Nosotros', to: '/#nosotros' },
     { label: 'Contacto', to: '/#contacto' },
   ];
@@ -146,18 +147,21 @@ export default function PrivacyPolicy() {
               <p className="text-base md:text-lg text-[#1d1c15]/80 mb-6 leading-relaxed">
                 El correo electrónico se usa únicamente para identificar tu cuenta, permitir el inicio de sesión y recuperar el acceso. No lo utilizamos para enviar publicidad ni lo compartimos con terceros con fines de marketing. Puedes eliminar tu cuenta y todos los datos asociados en cualquier momento, directamente desde la aplicación, sin necesidad de contactarnos: en la sección de tu cuenta encontrarás la opción para borrar tu perfil y la información vinculada a tu membresía de forma permanente. Si encuentras algún problema con este proceso, puedes escribirnos a <span className="font-semibold text-[#D95C1E]">logicatstudio@gmail.com</span>.
               </p>
+              <p className="text-base md:text-lg text-[#1d1c15]/80 mb-6 leading-relaxed">
+                Si quieres ver los pasos uno por uno, consulta <Link to="/delete-account" className="font-semibold text-[#D95C1E] hover:underline underline-offset-4">Cómo eliminar tu cuenta</Link>.
+              </p>
 
               <h2 className="text-xl md:text-2xl font-bold mb-3 text-[#1d1c15]">
                 <span className="text-[#D95C1E]">6.</span> Compras dentro de la aplicación y membresías
               </h2>
               <p className="text-base md:text-lg text-[#1d1c15]/80 mb-6 leading-relaxed">
-                Clippy puede ofrecer compras dentro de la aplicación (IAP) para acceder a funciones o membresías. El pago se procesa íntegramente en la tienda correspondiente (Google Play o App Store): Clippy no solicita ni almacena números de tarjeta, datos bancarios ni información de facturación.
+                Clippy puede ofrecer compras dentro de la aplicación (IAP) para mejorar tu plan. Se trata de pagos únicos: no hay suscripciones mensuales ni renovaciones automáticas. El pago se procesa íntegramente en Google Play: Clippy no solicita ni almacena números de tarjeta, datos bancarios ni información de facturación.
               </p>
               <p className="text-base md:text-lg text-[#1d1c15]/80 mb-6 leading-relaxed">
-                Para que tu membresía se reconozca en todos tus dispositivos, vinculamos el estado de la compra a tu cuenta: identificador del producto, estado de la suscripción, fechas de vigencia y, cuando la tienda lo facilita, un identificador de transacción o token de compra que permite verificar y restaurar la adquisición. Estos datos se usan exclusivamente para validar y restaurar tu acceso, nunca con fines publicitarios ni se venden a terceros.
+                Tanto la aplicación móvil como la aplicación de escritorio utilizan la autenticación de tu cuenta de Clippy para sincronizar tu plan entre dispositivos. Para reconocer y restaurar tu compra vinculamos a tu cuenta el identificador del producto y, cuando la tienda lo facilita, un identificador de transacción o token de compra. Estos datos se usan exclusivamente para validar tu acceso de por vida, nunca con fines publicitarios ni se venden a terceros.
               </p>
               <p className="text-base md:text-lg text-[#1d1c15]/80 mb-6 leading-relaxed">
-                Las compras realizadas sin iniciar sesión no se pueden asociar a una cuenta y, por lo tanto, no se pueden restaurar en otros dispositivos. La administración, cancelación y los reembolsos se gestionan desde la tienda donde se realizó la compra, según sus políticas. Si cancelas una suscripción, el acceso permanece activo hasta el final del periodo ya abonado.
+                Las compras realizadas sin iniciar sesión no se pueden asociar a una cuenta y, por lo tanto, no se pueden restaurar en otros dispositivos. Los reembolsos se gestionan desde Google Play, según sus políticas. Puedes seguir usando Clippy de forma gratuita sin realizar ninguna compra.
               </p>
 
               <h2 className="text-xl md:text-2xl font-bold mb-3 text-[#1d1c15]">
@@ -207,13 +211,21 @@ export default function PrivacyPolicy() {
             </span>
           </Link>
 
-          <Link 
-            to="/privacy-policy" 
-            aria-current="page"
-            className="text-xs text-gray-400 hover:text-[#D95C1E] transition-colors underline decoration-[#D95C1E]/40 underline-offset-4"
-          >
-            Política de Privacidad
-          </Link>
+          <div className="flex flex-col items-center gap-1">
+            <Link 
+              to="/privacy-policy" 
+              aria-current="page"
+              className="text-xs text-gray-400 hover:text-[#D95C1E] transition-colors underline decoration-[#D95C1E]/40 underline-offset-4"
+            >
+              Política de Privacidad
+            </Link>
+            <Link 
+              to="/delete-account" 
+              className="text-xs text-gray-400 hover:text-[#D95C1E] transition-colors underline decoration-[#D95C1E]/40 underline-offset-4"
+            >
+              Cómo eliminar tu cuenta
+            </Link>
+          </div>
 
           {/* Right Side: Copyright */}
           <div className="text-xs text-gray-400 sm:flex-1 sm:text-right">

@@ -9,8 +9,52 @@ import logicatLogo from '../assets/logicatstudio_logo.png';
 import kikemm11 from '../assets/me.jpg';
 import logicat from '../assets/logicat.png';
 
+const subscriptionPlans = [
+  {
+    id: 'free',
+    name: 'Plan Free',
+    price: 'Gratis',
+    limit: 'Hasta 10 MB por transferencia',
+    ads: 'Incluye anuncios',
+    badge: 'Básico',
+    cta: 'Plan inicial',
+    recommended: false,
+  },
+  {
+    id: 'bronze',
+    name: 'Plan Bronze',
+    price: '$2 USD',
+    limit: 'Hasta 50 MB por transferencia',
+    ads: 'Sin anuncios',
+    badge: 'Pago único',
+    cta: 'Obtener en Google Play',
+    recommended: false,
+  },
+  {
+    id: 'silver',
+    name: 'Plan Silver',
+    price: '$5 USD',
+    limit: 'Hasta 250 MB por transferencia',
+    ads: 'Sin anuncios',
+    badge: 'Más elegido',
+    cta: 'Obtener en Google Play',
+    recommended: true,
+  },
+  {
+    id: 'gold',
+    name: 'Plan Gold',
+    price: '$7 USD',
+    limit: 'Hasta 500 MB por transferencia',
+    ads: 'Sin anuncios',
+    badge: 'Máxima capacidad',
+    cta: 'Obtener en Google Play',
+    recommended: false,
+  },
+];
+
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState(null);
   const location = useLocation();
 
   // Allows other routes (e.g. /privacy-policy) to link back to a specific section
@@ -40,6 +84,11 @@ export default function Home() {
         event_label: label,
       });
     }
+  };
+
+  const handlePlanSelect = (plan) => {
+    setSelectedPlan(plan);
+    trackEvent('click_plan_cta', 'Subscriptions', plan.name);
   };
 
   return (
@@ -76,6 +125,18 @@ export default function Home() {
               className="relative py-1 group cursor-pointer hover:text-white transition-colors drop-shadow-sm"
             >
               Descargar
+              <span className="absolute bottom-0 left-0 w-full h-[2.5px] bg-[#D95C1E] rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left" />
+            </a>
+
+            <a 
+              href="#subscripciones" 
+              onClick={(e) => {
+                scrollToSection('subscripciones')(e);
+                trackEvent('click_nav', 'Navigation', 'Suscripciones Section');
+              }}
+              className="relative py-1 group cursor-pointer hover:text-white transition-colors drop-shadow-sm"
+            >
+              Suscripciones
               <span className="absolute bottom-0 left-0 w-full h-[2.5px] bg-[#D95C1E] rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left" />
             </a>
 
@@ -126,6 +187,16 @@ export default function Home() {
               className="hover:text-[#D95C1E] transition-colors py-2 border-b border-white/5"
             >
               Descargar
+            </a>
+            <a 
+              href="#subscripciones" 
+              onClick={(e) => {
+                scrollToSection('subscripciones')(e);
+                trackEvent('click_nav', 'Navigation', 'Suscripciones Section');
+              }}
+              className="hover:text-[#D95C1E] transition-colors py-2 border-b border-white/5"
+            >
+              Suscripciones
             </a>
             <a 
               href="#nosotros" 
@@ -393,6 +464,174 @@ export default function Home() {
           <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#D95C1E]/30 to-transparent" />
         </div>
 
+        {/* Suscripciones Section */}
+        <section id="subscripciones" className="py-12 md:py-16 px-6 max-w-6xl mx-auto w-full scroll-mt-20">
+
+          {/* Section Indicator */}
+          <div className="text-left mb-2">
+            <span className="text-xs md:text-sm font-semibold tracking-wider text-[#D95C1E] uppercase">
+              Planes opcionales
+            </span>
+          </div>
+
+          {/* Section Title & Description */}
+          <div className="text-left mb-8 max-w-3xl">
+            <h2 className="text-3xl md:text-4xl font-black italic tracking-tight text-[#1d1c15] mb-4">
+              Suscripciones
+            </h2>
+            <p className="text-base md:text-lg text-[#1d1c15]/80 leading-relaxed">
+              Clippy es y seguirá siendo gratuito para compartir archivos en tu red local. Los planes son completamente opcionales: solo amplían los límites y eliminan los anuncios si decides apoyar el proyecto.
+            </p>
+          </div>
+
+          {/* Value Proposition Banner */}
+          <div className="bg-[#faf8f5] border border-[#1d1c15]/10 rounded-3xl shadow-sm p-6 md:p-8 mb-8">
+            <div className="flex flex-col md:flex-row md:items-center gap-6">
+              <div className="flex-1 max-w-3xl">
+                <span className="inline-block bg-[#D95C1E]/10 text-[#D95C1E] rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider mb-4">
+                  Pago único · Para siempre
+                </span>
+                <h3 className="text-xl md:text-2xl font-bold text-[#1d1c15] mb-2">
+                  Un solo pago. Tus beneficios para siempre en todos tus dispositivos.
+                </h3>
+                <p className="text-sm md:text-base text-[#594138] leading-relaxed">
+                  Sin suscripciones mensuales. Al mejorar tu plan, conservas tus beneficios de por vida en todos los dispositivos donde inicies sesión con tu cuenta de Clippy. La app móvil y la app de escritorio usan el mismo inicio de sesión para sincronizar tu plan.
+                </p>
+              </div>
+
+              {/* Google Play Purchase Notice */}
+              <div className="flex items-start gap-3 bg-white/70 border border-[#1d1c15]/10 rounded-2xl p-4 md:w-80">
+                <svg className="w-5 h-5 text-[#D95C1E] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                <p className="text-xs md:text-sm text-[#594138] leading-relaxed">
+                  Las compras se realizan dentro de la app de Google Play vinculada a tu cuenta de Clippy. Una vez completadas, tus límites y funciones se sincronizan en tus dispositivos.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Plans Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {subscriptionPlans.map((plan) => {
+              const isPaid = plan.id !== 'free';
+
+              return (
+                <div 
+                  key={plan.id} 
+                  className={`bg-white p-6 rounded-3xl border shadow-sm hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex flex-col ${plan.recommended ? 'border-[#D95C1E] ring-1 ring-[#D95C1E]/30' : 'border-[#1d1c15]/10'}`}
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className="font-bold text-lg text-[#1d1c15]">{plan.name}</h3>
+                    <span className={`shrink-0 text-[10px] font-bold uppercase tracking-wide rounded-full px-2 py-1 ${plan.recommended ? 'bg-[#D95C1E]/10 text-[#D95C1E]' : 'bg-[#faf8f5] text-[#594138]'}`}>
+                      {plan.badge}
+                    </span>
+                  </div>
+
+                  <div className="mt-4 flex items-baseline gap-2">
+                    <span className="text-3xl font-black tracking-tight text-[#1d1c15]">{plan.price}</span>
+                    {isPaid && <span className="text-xs font-semibold text-[#594138]">pago único</span>}
+                  </div>
+
+                  <div className="w-full h-[1px] bg-[#1d1c15]/10 my-5" />
+
+                  <ul className="space-y-3 flex-grow">
+                    <li className="flex items-start gap-2.5">
+                      <svg className="w-4 h-4 text-[#D95C1E] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19V5m0 0l-4 4m4-4l4 4M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1" />
+                      </svg>
+                      <span className="text-sm text-[#594138] leading-snug">{plan.limit}</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      {isPaid ? (
+                        <svg className="w-4 h-4 text-[#D95C1E] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      ) : (
+                        <svg className="w-4 h-4 text-[#594138] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 010 7.07" />
+                        </svg>
+                      )}
+                      <span className="text-sm text-[#594138] leading-snug">{plan.ads}</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <svg className="w-4 h-4 text-[#594138] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                      <span className="text-sm text-[#594138] leading-snug">
+                        {isPaid ? 'Para siempre en tu cuenta' : 'Sincronización P2P local'}
+                      </span>
+                    </li>
+                  </ul>
+
+                  <button 
+                    type="button"
+                    onClick={() => handlePlanSelect(plan)}
+                    className={`mt-6 w-full py-3 px-4 rounded-xl font-semibold text-sm shadow-md transition-colors flex items-center justify-center gap-2 text-white ${plan.recommended ? 'bg-[#D95C1E] hover:bg-[#c24f17]' : 'bg-[#1d1c15] hover:bg-black'}`}
+                  >
+                    <span>{plan.cta}</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* CTA Notice */}
+          {selectedPlan && (
+            <div role="status" className="mt-6 flex items-start gap-3 bg-[#1d1c15] text-white rounded-2xl px-5 py-4 shadow-lg">
+              <svg className="w-5 h-5 text-[#D95C1E] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p className="text-sm leading-relaxed flex-grow">
+                {selectedPlan.id === 'free'
+                  ? 'Plan Free incluido por defecto en todas las cuentas de Clippy. Puedes mejorarlo desde la app de Google Play con tu cuenta.'
+                  : `Para activar ${selectedPlan.name} (${selectedPlan.price}), abre Clippy en Google Play e inicia sesión con tu cuenta de Clippy.`}
+              </p>
+              <button 
+                type="button" 
+                aria-label="Cerrar aviso" 
+                onClick={() => setSelectedPlan(null)}
+                className="text-white/60 hover:text-white transition-colors"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          )}
+
+          {/* Footer Reassurance Strip */}
+          <div className="mt-8 bg-white border border-[#1d1c15]/10 rounded-2xl px-6 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <span className="flex items-center gap-2 text-xs md:text-sm font-medium text-[#594138]">
+              <svg className="w-4 h-4 text-[#D95C1E] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Activo en todos tus dispositivos con tu cuenta
+            </span>
+            <span className="flex items-center gap-2 text-xs md:text-sm font-medium text-[#594138]">
+              <svg className="w-4 h-4 text-[#D95C1E] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Sin cuotas recurrentes ni renovaciones
+            </span>
+            <span className="flex items-center gap-2 text-xs md:text-sm font-medium text-[#594138]">
+              <svg className="w-4 h-4 text-[#D95C1E] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Compra gestionada en la app de Google Play
+            </span>
+          </div>
+
+        </section>
+
+        {/* Subtle Horizontal Section Separator */}
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#D95C1E]/30 to-transparent" />
+        </div>
+
         {/* Nosotros Section */}
         <section id="nosotros" className="py-12 md:py-16 px-6 max-w-6xl mx-auto w-full scroll-mt-20">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center bg-[#faf8f5] p-8 md:p-12 rounded-3xl border border-[#1d1c15]/10 shadow-sm">
@@ -532,12 +771,20 @@ export default function Home() {
       </span>
     </div>
 
-    <Link 
-      to="/privacy-policy" 
-      className="text-xs text-gray-400 hover:text-[#D95C1E] transition-colors underline decoration-[#D95C1E]/40 underline-offset-4"
-    >
-      Política de Privacidad
-    </Link>
+    <div className="flex flex-col items-center gap-1">
+      <Link 
+        to="/privacy-policy" 
+        className="text-xs text-gray-400 hover:text-[#D95C1E] transition-colors underline decoration-[#D95C1E]/40 underline-offset-4"
+      >
+        Política de Privacidad
+      </Link>
+      <Link 
+        to="/delete-account" 
+        className="text-xs text-gray-400 hover:text-[#D95C1E] transition-colors underline decoration-[#D95C1E]/40 underline-offset-4"
+      >
+        Cómo eliminar tu cuenta
+      </Link>
+    </div>
 
     {/* Right Side: Copyright */}
     <div className="text-xs text-gray-400 sm:flex-1 sm:text-right">

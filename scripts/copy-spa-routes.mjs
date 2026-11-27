@@ -4,7 +4,7 @@
 import { mkdir, copyFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-const routes = ['privacy-policy'];
+const routes = ['privacy-policy', 'delete-account'];
 
 const distDir = resolve('dist');
 const indexFile = resolve(distDir, 'index.html');
